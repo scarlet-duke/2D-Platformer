@@ -1090,7 +1090,7 @@ MonoBehaviour:
   _groundCheck: {fileID: 1077247597}
   _groundLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
   _checkRadius: 0.2
   _game: {fileID: 123892108}
 --- !u!70 &1157488137

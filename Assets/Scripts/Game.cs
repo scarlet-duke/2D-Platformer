@@ -2,10 +2,16 @@ using UnityEngine;
 
 public class Game : MonoBehaviour
 {
-    private void Start()
+    [SerializeField] private HealthPlayer _healthPlayer;
+
+    private void OnEnable()
     {
-        HealthPlayer healthPlayer = FindObjectOfType<HealthPlayer>();
-        healthPlayer.gameOver += GameOver;
+        _healthPlayer.GameOver += GameOver;
+    }
+
+    private void OnDisable()
+    {
+        _healthPlayer.GameOver -= GameOver;
     }
 
     public void GameOver()

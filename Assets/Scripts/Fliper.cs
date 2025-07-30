@@ -1,15 +1,10 @@
 using UnityEngine;
 
-[RequireComponent(typeof(SpriteRenderer))]
 public class Fliper : MonoBehaviour
 {
-    private SpriteRenderer _spriteRenderer;
     private float _lastPosition;
-
-    private void Awake()
-    {
-        _spriteRenderer = GetComponent<SpriteRenderer>();
-    }
+    private float _right = 0;
+    private float _left = 180;
 
     private void FixedUpdate()
     {
@@ -17,11 +12,11 @@ public class Fliper : MonoBehaviour
 
         if (_lastPosition > position)
         {
-            Flip(true);
+            Flip(_left);
         }
-        else if( _lastPosition < position)
+        else if (_lastPosition < position)
         {
-            Flip(false);
+            Flip(_right);
         }
         else
         {
@@ -31,8 +26,8 @@ public class Fliper : MonoBehaviour
         _lastPosition = position;
     }
 
-    private void Flip(bool isFacingRight)
+    private void Flip(float direction)
     {
-        _spriteRenderer.flipX = isFacingRight;
+        transform.rotation = Quaternion.Euler(0, direction, 0);
     }
 }

@@ -10,10 +10,10 @@ public class PlayerMover : MonoBehaviour
     [SerializeField] private LayerMask _groundLayer;
     [SerializeField] private float _checkRadius = 0.2f;
     [SerializeField] private Animator _animator;
+    [SerializeField] private InputReader _inputReader;
 
     private bool _isGrounded;
     private Rigidbody2D _rigidbody;
-    private float _moveInput;
     private int _runningHash;
 
     private void Start()
@@ -22,19 +22,30 @@ public class PlayerMover : MonoBehaviour
         _runningHash = Animator.StringToHash("IsRunning");
     }
 
-    private void Update()
+    private void OnEnable()
+    {
+        _inputReader.Jump += Jump;
+        _inputReader.Run += Run;
+    }
+
+    private void OnDisable()
+    {
+        _inputReader.Jump -= Jump;
+        _inputReader.Run += Run;
+    }
+
+    public void Jump()
     {
         _isGrounded = Physics2D.OverlapCircle(_groundCheck.position, _checkRadius, _groundLayer);
 
-        if (Input.GetKeyDown(KeyCode.Space) && _isGrounded)
+        if (_isGrounded)
         {
             _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, _jumpForce);
         }
     }
 
-    private void FixedUpdate()
+    public void Run(float _moveInput)
     {
-        _moveInput = Input.GetAxisRaw(HorizontalMovement);
         _rigidbody.velocity = new Vector2(_moveInput * _moveSpeed, _rigidbody.velocity.y);
 
         if (_moveInput == 0)

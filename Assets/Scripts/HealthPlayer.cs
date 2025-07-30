@@ -3,10 +3,10 @@ using UnityEngine;
 
 public class HealthPlayer : MonoBehaviour
 {
-    public event Action gameOver;
+    public event Action GameOver;
 
     public void Death()
     {
-        gameOver?.Invoke();
+        GameOver?.Invoke();
     }
 }

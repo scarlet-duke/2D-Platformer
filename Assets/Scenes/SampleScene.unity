@@ -135,6 +135,7 @@ GameObject:
   - component: {fileID: 123892105}
   - component: {fileID: 123892107}
   - component: {fileID: 123892108}
+  - component: {fileID: 123892109}
   m_Layer: 3
   m_Name: Square
   m_TagString: Untagged
@@ -266,6 +267,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ce5c4f09f7323e4295b0c0bd8a7f67c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _healthPlayer: {fileID: 1157488144}
+--- !u!114 &123892109
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 123892103}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf6dd647b707a2e47b8803b8f903e467, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerMover: {fileID: 1157488142}
 --- !u!1 &406308569
 GameObject:
   m_ObjectHideFlags: 0
@@ -310,6 +325,7 @@ GameObject:
   - component: {fileID: 477722097}
   - component: {fileID: 477722096}
   - component: {fileID: 477722095}
+  - component: {fileID: 477722100}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -424,6 +440,18 @@ Transform:
   - {fileID: 1892026002}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &477722100
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 477722094}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8daf841503f97a40b77c628824f616d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -914,6 +942,7 @@ GameObject:
   - component: {fileID: 1157488142}
   - component: {fileID: 1157488143}
   - component: {fileID: 1157488144}
+  - component: {fileID: 1157488145}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1020,6 +1049,7 @@ MonoBehaviour:
     m_Bits: 8
   _checkRadius: 0.2
   _animator: {fileID: 1537161523}
+  _inputReader: {fileID: 123892109}
 --- !u!114 &1157488143
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1032,6 +1062,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63551baa0d891f746bf6f02e7c8b41cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _purse: 0
 --- !u!114 &1157488144
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1042,6 +1073,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3a9aedc59bcd6a543bb825367fcabd5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1157488145
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1157488135}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8daf841503f97a40b77c628824f616d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1222670257
@@ -1099,7 +1142,6 @@ GameObject:
   - component: {fileID: 1537161521}
   - component: {fileID: 1537161523}
   - component: {fileID: 1537161522}
-  - component: {fileID: 1537161524}
   m_Layer: 0
   m_Name: Model
   m_TagString: Untagged
@@ -1195,18 +1237,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &1537161524
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1537161520}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b8daf841503f97a40b77c628824f616d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1746509591
 GameObject:
   m_ObjectHideFlags: 0
@@ -1378,7 +1408,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1892026002}
   - component: {fileID: 1892026003}
-  - component: {fileID: 1892026004}
   m_Layer: 0
   m_Name: Model
   m_TagString: Untagged
@@ -1453,18 +1482,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1892026004
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1892026001}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b8daf841503f97a40b77c628824f616d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

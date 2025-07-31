@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[RequireComponent (typeof(Rigidbody2D))]
 public class PlayerMover : MonoBehaviour
 {
     private const string HorizontalMovement = "Horizontal";
@@ -9,17 +10,16 @@ public class PlayerMover : MonoBehaviour
     [SerializeField] private Transform _groundCheck;
     [SerializeField] private LayerMask _groundLayer;
     [SerializeField] private float _checkRadius = 0.2f;
-    [SerializeField] private Animator _animator;
+    [SerializeField] private CharacterAnimator _characterAnimator;
     [SerializeField] private InputReader _inputReader;
+    [SerializeField] private Fliper _fliper;
 
     private bool _isGrounded;
     private Rigidbody2D _rigidbody;
-    private int _runningHash;
 
     private void Start()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
-        _runningHash = Animator.StringToHash("IsRunning");
     }
 
     private void OnEnable()
@@ -50,11 +50,12 @@ public class PlayerMover : MonoBehaviour
 
         if (_moveInput == 0)
         {
-            _animator.SetBool(_runningHash, false);
+            _characterAnimator.RunAnimation(false);
         }
         else
         {
-            _animator.SetBool(_runningHash, true);
+            _fliper.DetermineDirection(_rigidbody.position.x, _rigidbody.position.x + _moveInput);
+            _characterAnimator.RunAnimation(true);
         }
     }
 }

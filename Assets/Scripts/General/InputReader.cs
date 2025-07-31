@@ -5,12 +5,10 @@ using UnityEngine;
 
 public class InputReader : MonoBehaviour
 {
-    [SerializeField] private PlayerMover _playerMover;
+    private const string HorizontalMovement = "Horizontal";
 
     public event Action Jump;
     public event Action<float> Run;
-
-    private const string HorizontalMovement = "Horizontal";
 
     private void Update()
     {
@@ -18,13 +16,7 @@ public class InputReader : MonoBehaviour
         {
             Jump?.Invoke();
         }
-    }
 
-    private void FixedUpdate()
-    {
-        if(Input.GetAxisRaw(HorizontalMovement) != null)
-        {
-            Run?.Invoke(Input.GetAxisRaw(HorizontalMovement));
-        }
+        Run?.Invoke(Input.GetAxisRaw(HorizontalMovement));
     }
 }

@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class HealthPlayer : MonoBehaviour
+public class LifePlayer : MonoBehaviour
 {
     public event Action GameOver;
 

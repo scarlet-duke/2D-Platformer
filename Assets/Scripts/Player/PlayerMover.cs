@@ -44,17 +44,17 @@ public class PlayerMover : MonoBehaviour
         }
     }
 
-    public void Run(float _moveInput)
+    public void Run(float moveInput)
     {
-        _rigidbody.velocity = new Vector2(_moveInput * _moveSpeed, _rigidbody.velocity.y);
+        _rigidbody.velocity = new Vector2(moveInput * _moveSpeed, _rigidbody.velocity.y);
 
-        if (_moveInput == 0)
+        if (moveInput == 0)
         {
             _characterAnimator.RunAnimation(false);
         }
         else
         {
-            _fliper.DetermineDirection(_rigidbody.position.x, _rigidbody.position.x + _moveInput);
+            _fliper.DetermineDirection(_rigidbody.position.x, _rigidbody.position.x + moveInput);
             _characterAnimator.RunAnimation(true);
         }
     }

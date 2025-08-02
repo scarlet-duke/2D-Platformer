@@ -15,10 +15,6 @@ public class Fliper : MonoBehaviour
         {
             Flip(_right);
         }
-        else
-        {
-            return;
-        }
     }
 
     private void Flip(float direction)

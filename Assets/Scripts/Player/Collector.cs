@@ -14,7 +14,7 @@ public class Collector : MonoBehaviour
         }
         else if(other.TryGetComponent(out MedKit medKit))
         {
-            health.HealingDamage(medKit.Healing);
+            health.Heal(medKit.Healing);
             medKit.Disappear();
         }
     }

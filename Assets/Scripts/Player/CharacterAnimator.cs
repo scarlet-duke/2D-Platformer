@@ -13,8 +13,8 @@ public class CharacterAnimator : MonoBehaviour
         _runningHash = Animator.StringToHash("IsRunning");
     }
 
-    public void RunAnimation(bool _runs)
+    public void RunAnimation(bool isRunning)
     {
-        _animator.SetBool(_runningHash, _runs);
+        _animator.SetBool(_runningHash, isRunning);
     }
 }

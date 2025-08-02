@@ -24,8 +24,13 @@ public class Health : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public void TakingDamage(int damage)
+    public void TakeDamage(int damage)
     {
+        if (damage < 0)
+        {
+            return;
+        }
+
         if (_canTakeDamage)
         {
             _health -= damage;
@@ -40,8 +45,13 @@ public class Health : MonoBehaviour
         }
     }
 
-    public void HealingDamage(int healing)
+    public void Heal(int healing)
     {
+        if (healing < 0)
+        {
+            return;
+        }
+
         _health += healing;
 
         if (_health > _maxHealth)

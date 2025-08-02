@@ -9,7 +9,7 @@ public class TouchDamage : MonoBehaviour
     {
         if (other.TryGetComponent<Health>(out var health))
         {
-            health.TakingDamage(_damage);
+            health.TakeDamage(_damage);
         }
     }
 }

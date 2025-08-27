@@ -1,10 +1,10 @@
 using UnityEngine;
 
-[RequireComponent (typeof(Rigidbody2D))]
 public class PlayerMover : MonoBehaviour
 {
     private const string HorizontalMovement = "Horizontal";
 
+    [SerializeField] private Rigidbody2D _rigidbody;
     [SerializeField] private float _moveSpeed = 5f;
     [SerializeField] private float _jumpForce = 10f;
     [SerializeField] private Transform _groundCheck;
@@ -15,7 +15,6 @@ public class PlayerMover : MonoBehaviour
     [SerializeField] private Fliper _fliper;
 
     private bool _isGrounded;
-    private Rigidbody2D _rigidbody;
 
     private void Start()
     {

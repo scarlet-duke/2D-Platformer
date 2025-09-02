@@ -7,9 +7,14 @@ using UnityEngine.UI;
 
 public class HealthSmoothSlider : HealthSlider
 {
-    public event Action GameOver;
     private float _delayHealthChange = 0.01f;
     private int _maxDelta = 1;
+    private WaitForSeconds _waitForSeconds;
+
+    private void Awake()
+    {
+        _waitForSeconds = new WaitForSeconds(_delayHealthChange);
+    }
 
     public override void HealthChange(int health)
     {
@@ -20,7 +25,7 @@ public class HealthSmoothSlider : HealthSlider
     {
         while (_slider.value != health)
         {
-            yield return new WaitForSeconds(_delayHealthChange);
+            yield return _waitForSeconds;
             _slider.value = Mathf.MoveTowards(_slider.value, health, _maxDelta);
         }
     }

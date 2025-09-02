@@ -9,12 +9,19 @@ public class Health : MonoBehaviour
     [SerializeField] private int _maxValue = 100;
     [SerializeField] private int _value;
 
-    public event Action GameOver;
-    public event Action<int> ValueChanged;
     private bool _canTakeDamage = true;
     private float _invincibilityFrames = 1f;
+    private WaitForSeconds _waitForSeconds;
+
+    public event Action GameOver;
+    public event Action<int> ValueChanged;
 
     public int MaxValue => _maxValue;
+
+    private void Awake()
+    {
+        _waitForSeconds = new WaitForSeconds(_invincibilityFrames);
+    }
 
     private void Start()
     {
@@ -29,7 +36,6 @@ public class Health : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        Debug.Log("по ебалу" + damage + );
         if (damage < 0)
         {
             return;
@@ -70,7 +76,7 @@ public class Health : MonoBehaviour
 
     private IEnumerator DelayBeforeTakingDamage()
     {
-        yield return new WaitForSeconds(_invincibilityFrames);
+        yield return _waitForSeconds;
         _canTakeDamage = true;
     }
 }

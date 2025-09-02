@@ -8,9 +8,9 @@ public class TargetDetector : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.TryGetComponent<Player>(out var player))
+        if (other.TryGetComponent<PlayerMover>(out var playerMover))
         {
-            _patroller.ChangeTarget(player.transform);
+            _patroller.ChangeTarget(playerMover.transform);
         }
     }
 }

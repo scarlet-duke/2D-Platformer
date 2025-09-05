@@ -8,10 +8,10 @@ public class Patroller : MonoBehaviour
     [SerializeField] private float _speed = 1.0f;
     [SerializeField] private Fliper _fliper;
 
-    private int _currentWaypointIndex = 0;
     private float _triggerDistance = 0.1f;
     private bool _targetFound = false;
     private Transform _player;
+    private int _currentWaypointIndex = 0;
 
     private void Update()
     {

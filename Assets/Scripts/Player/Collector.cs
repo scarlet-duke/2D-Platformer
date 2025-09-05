@@ -3,7 +3,7 @@ using UnityEngine;
 public class Collector : MonoBehaviour
 {
     [SerializeField] private int _purse;
-    [SerializeField] Health health;
+    [SerializeField] private Health _health;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -14,7 +14,7 @@ public class Collector : MonoBehaviour
         }
         else if(other.TryGetComponent(out MedKit medKit))
         {
-            health.Heal(medKit.Healing);
+            _health.Heal(medKit.Healing);
             medKit.Disappear();
         }
     }

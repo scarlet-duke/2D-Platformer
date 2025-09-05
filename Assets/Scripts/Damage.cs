@@ -2,14 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DamageTouch : MonoBehaviour
+public class Damage : MonoBehaviour
 {
-    [SerializeField] private int _damage = 10;
+    [SerializeField] private int _value = 10;
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.TryGetComponent<Health>(out var health))
         {
-            health.TakeDamage(_damage);
+            health.TakeDamage(_value);
         }
     }
 }

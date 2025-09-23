@@ -26,7 +26,7 @@ public class HealthSlider : MonoBehaviour
         _slider.value = _health.MaxValue;
     }
 
-    public virtual void HealthChange(int health)
+    public virtual void HealthChange(float health)
     {
         _slider.value = health;
     }

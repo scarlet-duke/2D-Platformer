@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Damage : MonoBehaviour
 {
-    [SerializeField] private int _value = 10;
+    [SerializeField] private float _value = 10;
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.TryGetComponent<Health>(out var health))

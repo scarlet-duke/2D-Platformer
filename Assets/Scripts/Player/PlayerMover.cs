@@ -8,7 +8,7 @@ public class PlayerMover : MonoBehaviour
     [SerializeField] private CharacterAnimator _characterAnimator;
     [SerializeField] private Fliper _fliper;
 
-    private void Start()
+    private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
     }

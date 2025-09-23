@@ -6,17 +6,18 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
-    [SerializeField] private int _maxValue = 100;
-    [SerializeField] private int _value;
+    [SerializeField] private float _maxValue = 100;
+    [SerializeField] private float _value;
+    [SerializeField] private GameObject _gameObject;
 
     private bool _canTakeDamage = true;
     private float _invincibilityFrames = 1f;
     private WaitForSeconds _waitForSeconds;
 
     public event Action GameOver;
-    public event Action<int> ValueChanged;
+    public event Action<float> ValueChanged;
 
-    public int MaxValue => _maxValue;
+    public float MaxValue => _maxValue;
 
     private void Awake()
     {
@@ -31,10 +32,10 @@ public class Health : MonoBehaviour
     private void Death()
     {
         GameOver?.Invoke();
-        Destroy(gameObject);
+        Destroy(_gameObject);
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
         if (damage < 0)
         {
@@ -52,12 +53,10 @@ public class Health : MonoBehaviour
             }
 
             ValueChanged?.Invoke(_value);
-            _canTakeDamage = false;
-            StartCoroutine(DelayBeforeTakingDamage());
         }
     }
 
-    public void Heal(int healing)
+    public void Heal(float healing)
     {
         if (healing < 0)
         {
@@ -72,11 +71,5 @@ public class Health : MonoBehaviour
         }
 
         ValueChanged?.Invoke(_value);
-    }
-
-    private IEnumerator DelayBeforeTakingDamage()
-    {
-        yield return _waitForSeconds;
-        _canTakeDamage = true;
     }
 }

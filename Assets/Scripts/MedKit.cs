@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class MedKit : MonoBehaviour
 {
-    [SerializeField] private int _healing = 25;
+    [SerializeField] private float _healing = 25;
 
-    public int Healing => _healing;
+    public float Healing => _healing;
 
     public void Disappear()
     {

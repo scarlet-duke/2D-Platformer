@@ -8,6 +8,7 @@ public class InputReader : MonoBehaviour
     private const string HorizontalMovement = "Horizontal";
 
     public event Action Jump;
+    public event Action VammpirismAbilityButtonClik;
     public event Action<float> Run;
 
     private void Update()
@@ -15,6 +16,11 @@ public class InputReader : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             Jump?.Invoke();
+        }
+
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            VammpirismAbilityButtonClik?.Invoke();
         }
 
         Run?.Invoke(Input.GetAxisRaw(HorizontalMovement));

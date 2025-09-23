@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class HealthSmoothSlider : HealthSlider
 {
     private float _delayHealthChange = 0.01f;
-    private int _maxDelta = 1;
+    private float _maxDelta = 1;
     private WaitForSeconds _waitForSeconds;
 
     private void Awake()
@@ -16,12 +16,12 @@ public class HealthSmoothSlider : HealthSlider
         _waitForSeconds = new WaitForSeconds(_delayHealthChange);
     }
 
-    public override void HealthChange(int health)
+    public override void HealthChange(float health)
     {
         StartCoroutine(DelaySliderMovement(health));
     }
 
-    private IEnumerator DelaySliderMovement(int health)
+    private IEnumerator DelaySliderMovement(float health)
     {
         while (_slider.value != health)
         {

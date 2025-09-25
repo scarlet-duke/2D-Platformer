@@ -8,15 +8,26 @@ using UnityEngine.UI;
 public class VampirismSlider : MonoBehaviour
 {
     [SerializeField] protected Slider _slider;
+    [SerializeField] protected Vampirism _vampirism;
 
     private float _maxDelta;
 
-    public void VampirismChange(float scaleChange, float durationAction)
+    private void OnEnable()
     {
-        StartCoroutine(DelaySliderMovement(scaleChange, durationAction));
+        _vampirism.ValueChanged += ChangeVampirism;
     }
 
-    private IEnumerator DelaySliderMovement(float scaleChange, float durationAction)
+    private void OnDisable()
+    {
+        _vampirism.ValueChanged -= ChangeVampirism;
+    }
+
+    public void ChangeVampirism(float scaleChange, float durationAction)
+    {
+        StartCoroutine(AnimateSliderToValue(scaleChange, durationAction));
+    }
+
+    private IEnumerator AnimateSliderToValue(float scaleChange, float durationAction)
     {
         _maxDelta = Mathf.Abs(_slider.maxValue / durationAction);
 

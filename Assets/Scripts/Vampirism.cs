@@ -10,47 +10,51 @@ public class Vampirism : MonoBehaviour
     [SerializeField] private CircleCollider2D _circleCollider;
     [SerializeField] private float _duration = 6f;
     [SerializeField] private float _reloading = 4f;
-    [SerializeField] private VampirismSlider _vampirismSlider;
+    [SerializeField] private LayerMask _layerMask;
 
     private Coroutine _durationCoroutine;
     private Coroutine _reloadingCoroutine;
-    bool isActive = false;
+    private bool isActive = false;
     private WaitForSeconds _waitForSeconds;
+    private Collider2D[] hitColliders;
+
+    public event Action<float, float> ValueChanged;
 
     private void Awake()
     {
         _waitForSeconds = new WaitForSeconds(_reloading);
+        hitColliders = new Collider2D[5];
     }
 
-    public void VampirismAbilityButtonClik()
+    public void ClickVampirismAbilityButton()
     {
         if (isActive == false)
         {
             isActive = true;
-            _vampirismSlider.VampirismChange(0, _duration);
-            _durationCoroutine = StartCoroutine(DurationCoroutine());
+            ValueChanged?.Invoke(0, _duration);
+            _durationCoroutine = StartCoroutine(RunDurationCoroutine());
         }
     }
 
-    private IEnumerator DurationCoroutine() 
+    private IEnumerator RunDurationCoroutine() 
     {
-        Enemy enemy;
+        Health health;
         float counter = 0;
 
         while (counter < _duration) 
         {
             counter += Time.deltaTime;
             yield return null;
-            enemy = GetClosesEnemy();
+            health = GetClosesEnemy();
 
-            if (enemy != null)
+            if (health != null)
             {
-                enemy.TakeDamage(_value * Time.deltaTime);
+                health.TakeDamage(_value * Time.deltaTime);
                 _healyhPlayer.Heal(_value * Time.deltaTime);
             }
         }
 
-        _vampirismSlider.VampirismChange(1, _reloading);
+        ValueChanged?.Invoke(1, _reloading);
         _reloadingCoroutine = StartCoroutine(ReloadingCoroutine());
     }
 
@@ -60,26 +64,26 @@ public class Vampirism : MonoBehaviour
         isActive = false;
     }
 
-    private Enemy GetClosesEnemy()
+    private Health GetClosesEnemy()
     {
-        Enemy closesEnemy = null;
+        Health closesHealth = null;
         float closesDistance = float.MaxValue;
 
-        Collider2D[] hitColliders = Physics2D.OverlapCircleAll(transform.position, _circleCollider.radius);
+        int amount = Physics2D.OverlapCircleNonAlloc(transform.position, _circleCollider.radius, hitColliders, _layerMask);
 
-        foreach (Collider2D hitCollider in hitColliders)
+        for (int i = 0; i < amount; i++)
         {
-            if (hitCollider.TryGetComponent(out Enemy enemy))
+            if (hitColliders[i].TryGetComponent(out Health health))
             {
-                Vector3 direction = transform.position - enemy.transform.position;
+                Vector3 direction = transform.position - health.transform.position;
                 if (direction.magnitude < closesDistance)
                 {
                     closesDistance = direction.magnitude;
-                    closesEnemy = enemy;
+                    closesHealth = health;
                 }
             }
         }
 
-        return closesEnemy;
+        return closesHealth;
     }
 }

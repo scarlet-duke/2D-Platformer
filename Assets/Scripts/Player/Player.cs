@@ -13,14 +13,14 @@ public class Player : MonoBehaviour
     {
         _inputReader.Jump += Jump;
         _inputReader.Run += Run;
-        _inputReader.VammpirismAbilityButtonClik += Vampirism;
+        _inputReader.VammpirismAbilityButtonClik += ActivateVampirism;
     }
 
     private void OnDisable()
     {
         _inputReader.Jump -= Jump;
         _inputReader.Run -= Run;
-        _inputReader.VammpirismAbilityButtonClik -= Vampirism;
+        _inputReader.VammpirismAbilityButtonClik -= ActivateVampirism;
     }
 
     private void Jump()
@@ -33,8 +33,8 @@ public class Player : MonoBehaviour
         _mover.Run(moveInput);
     }
 
-    private void Vampirism()
+    private void ActivateVampirism()
     {
-        _vampirism.VampirismAbilityButtonClik();
+        _vampirism.ClickVampirismAbilityButton();
     }
 }
